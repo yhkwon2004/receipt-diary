@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/receipt-diary/static/css/main.14c4d6cd.css",
+    "main.js": "/receipt-diary/static/js/main.6e8b490c.js",
+    "static/js/453.06a51140.chunk.js": "/receipt-diary/static/js/453.06a51140.chunk.js",
+    "index.html": "/receipt-diary/index.html",
+    "main.14c4d6cd.css.map": "/receipt-diary/static/css/main.14c4d6cd.css.map",
+    "main.6e8b490c.js.map": "/receipt-diary/static/js/main.6e8b490c.js.map",
+    "453.06a51140.chunk.js.map": "/receipt-diary/static/js/453.06a51140.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.14c4d6cd.css",
+    "static/js/main.6e8b490c.js"
+  ]
+}
