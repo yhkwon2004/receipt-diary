@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { signInWithEmail } from '../utils/database';
-import { BookOpen, Mail, Loader, CheckCircle, ArrowRight, Settings } from 'lucide-react';
+import { BookOpen, Mail, Loader, CheckCircle, ArrowRight, Settings, WifiOff } from 'lucide-react';
 
 interface AuthScreenProps {
   onSetupSupabase: () => void;
+  magicLinkError?: string;
+  onClearError?: () => void;
 }
 
 // ==================== 로그인 화면 ====================
-const AuthScreen: React.FC<AuthScreenProps> = ({ onSetupSupabase }) => {
+const AuthScreen: React.FC<AuthScreenProps> = ({ onSetupSupabase, magicLinkError, onClearError }) => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(magicLinkError || '');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +29,20 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onSetupSupabase }) => {
       setError(err);
     } else {
       setSent(true);
+    }
+  };
+
+  const handleOfflineMode = () => {
+    if (window.confirm(
+      '오프라인 모드를 사용하시겠습니까?\n\n' +
+      '• 데이터가 이 기기의 브라우저에만 저장됩니다.\n' +
+      '• 이메일 로그인 없이 바로 사용할 수 있습니다.\n' +
+      '• 설정에서 언제든지 온라인 모드로 전환할 수 있습니다.'
+    )) {
+      localStorage.removeItem('sb_url');
+      localStorage.removeItem('sb_anon_key');
+      localStorage.setItem('offline_mode', 'true');
+      window.location.reload();
     }
   };
 
@@ -62,7 +78,10 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onSetupSupabase }) => {
                 <input
                   type="email"
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={e => {
+                    setEmail(e.target.value);
+                    if (error && onClearError) onClearError();
+                  }}
                   placeholder="your@email.com"
                   className="auth-input"
                   autoComplete="email"
@@ -71,8 +90,17 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onSetupSupabase }) => {
                 />
               </div>
 
-              {error && (
-                <div className="auth-error">{error}</div>
+              {(error || magicLinkError) && (
+                <div className="auth-error">
+                  <strong>⚠️ 연결 오류</strong><br />
+                  {error || magicLinkError}
+                  <div style={{ marginTop: 8, fontSize: 12, color: '#666' }}>
+                    <strong>해결 방법:</strong><br />
+                    1. Supabase Site URL을 <code>https://yhkwon2004.github.io/receipt-diary/</code> 로 설정하세요<br />
+                    2. 방화벽/프록시 차단 시 모바일 데이터로 전환하세요<br />
+                    3. 또는 아래의 <strong>오프라인 모드</strong>를 사용하세요
+                  </div>
+                </div>
               )}
 
               <button
@@ -100,6 +128,12 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onSetupSupabase }) => {
               링크를 클릭하면 자동으로 로그인됩니다.<br />
               처음 사용하면 자동으로 계정이 만들어져요.
             </p>
+
+            {/* 오프라인 모드 버튼 */}
+            <button className="auth-offline-btn" onClick={handleOfflineMode}>
+              <WifiOff size={14} />
+              로그인 없이 오프라인 모드로 사용하기
+            </button>
           </>
         ) : (
           <div className="auth-sent">
@@ -115,6 +149,21 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onSetupSupabase }) => {
               링크는 10분 후 만료됩니다.<br />
               스팸 폴더도 확인해보세요.
             </p>
+            {/* 앱 직접 URL 안내 */}
+            <div className="auth-redirect-notice">
+              <strong>⚠️ 이메일 링크가 안 열릴 경우</strong><br />
+              이메일의 링크 대신 아래 URL로 직접 접속하세요:
+              <br />
+              <code
+                style={{ cursor: 'pointer', color: '#6366f1' }}
+                onClick={() => {
+                  navigator.clipboard.writeText('https://yhkwon2004.github.io/receipt-diary/');
+                  alert('복사됨!');
+                }}
+              >
+                https://yhkwon2004.github.io/receipt-diary/
+              </code>
+            </div>
             <button
               className="auth-resend-btn"
               onClick={() => setSent(false)}
