@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/receipt-diary/static/css/main.14c4d6cd.css",
-    "main.js": "/receipt-diary/static/js/main.6e8b490c.js",
+    "main.css": "/receipt-diary/static/css/main.c3108ab9.css",
+    "main.js": "/receipt-diary/static/js/main.ef886b51.js",
     "static/js/453.06a51140.chunk.js": "/receipt-diary/static/js/453.06a51140.chunk.js",
     "index.html": "/receipt-diary/index.html",
-    "main.14c4d6cd.css.map": "/receipt-diary/static/css/main.14c4d6cd.css.map",
-    "main.6e8b490c.js.map": "/receipt-diary/static/js/main.6e8b490c.js.map",
+    "main.c3108ab9.css.map": "/receipt-diary/static/css/main.c3108ab9.css.map",
+    "main.ef886b51.js.map": "/receipt-diary/static/js/main.ef886b51.js.map",
     "453.06a51140.chunk.js.map": "/receipt-diary/static/js/453.06a51140.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.14c4d6cd.css",
-    "static/js/main.6e8b490c.js"
+    "static/css/main.c3108ab9.css",
+    "static/js/main.ef886b51.js"
   ]
 }
