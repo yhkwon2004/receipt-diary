@@ -2443,3 +2443,180 @@ input:focus, select:focus, textarea:focus {
 .copy-sql-btn:hover {
   background: var(--primary-light);
 }
+
+/* ==================== 오프라인 모드 관련 CSS ==================== */
+
+/* 오프라인/온라인 모드 배지 */
+.offline-mode-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.offline-mode-badge.offline {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffc107;
+}
+
+.offline-mode-badge.online {
+  background: #d1edff;
+  color: #0369a1;
+  border: 1px solid #38bdf8;
+}
+
+/* 오프라인 모드 토글 버튼 */
+.offline-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid;
+}
+
+.offline-toggle-btn.active {
+  background: #e8f4fd;
+  color: #0369a1;
+  border-color: #38bdf8;
+}
+
+.offline-toggle-btn:not(.active) {
+  background: #fff8ed;
+  color: #92400e;
+  border-color: #f59e0b;
+}
+
+.offline-toggle-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* 오프라인 주의사항 박스 */
+.offline-info-box {
+  display: flex;
+  gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #78350f;
+}
+
+.offline-info-box ul {
+  margin: 4px 0 0 0;
+  padding-left: 16px;
+}
+
+.offline-info-box li {
+  margin-bottom: 3px;
+}
+
+/* 방화벽 안내 가이드 */
+.firewall-guide {
+  background: #f8faff;
+  border: 1px solid #e0e7ff;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.firewall-guide ol {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.firewall-guide li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.firewall-guide code {
+  background: #e0e7ff;
+  color: #4338ca;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  word-break: break-all;
+}
+
+/* 오프라인 모드 버튼 (모달 푸터) */
+.btn-offline {
+  background: #fff8ed;
+  color: #92400e;
+  border: 1.5px solid #f59e0b;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.btn-offline:hover {
+  background: #fef3c7;
+  transform: translateY(-1px);
+}
+
+/* 로그인 화면 - 오프라인 버튼 */
+.auth-offline-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  background: transparent;
+  color: #6b7280;
+  border: 1.5px dashed #d1d5db;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.auth-offline-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+/* 이메일 전송 후 리다이렉션 안내 */
+.auth-redirect-notice {
+  background: #fff8ed;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  font-size: 12px;
+  color: #78350f;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.auth-redirect-notice code {
+  display: block;
+  margin-top: 4px;
+  background: #fef3c7;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  word-break: break-all;
+}
+
