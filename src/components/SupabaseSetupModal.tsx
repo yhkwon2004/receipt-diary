@@ -5,10 +5,11 @@ import { resetSupabaseClient, isSupabaseConfigured } from '../utils/supabase';
 interface SupabaseSetupModalProps {
   onClose: () => void;
   onConfigured: () => void;
+  onOfflineMode?: () => void;
 }
 
 // ==================== Supabase 설정 모달 ====================
-const SupabaseSetupModal: React.FC<SupabaseSetupModalProps> = ({ onClose, onConfigured }) => {
+const SupabaseSetupModal: React.FC<SupabaseSetupModalProps> = ({ onClose, onConfigured, onOfflineMode }) => {
   const [url, setUrl] = useState(localStorage.getItem('sb_url') || '');
   const [anonKey, setAnonKey] = useState(localStorage.getItem('sb_anon_key') || '');
   const [saved, setSaved] = useState(false);
@@ -98,6 +99,20 @@ const SupabaseSetupModal: React.FC<SupabaseSetupModalProps> = ({ onClose, onConf
         </div>
 
         <div className="modal-footer">
+          {onOfflineMode && (
+            <button
+              className="btn-offline"
+              onClick={() => {
+                localStorage.removeItem('sb_url');
+                localStorage.removeItem('sb_anon_key');
+                localStorage.setItem('offline_mode', 'true');
+                onOfflineMode();
+              }}
+              title="Supabase 없이 로컬 브라우저에만 저장"
+            >
+              오프라인 모드 사용하기
+            </button>
+          )}
           <button className="btn-secondary" onClick={onClose}>취소</button>
           <button
             className={`btn-primary ${saved ? 'saved' : ''}`}
